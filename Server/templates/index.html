@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>The Hub</title>
+    <script src="/scripts/index.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <h1>Current State: {{ message }}</h1>
+    <form action="/led_on/" method="post">
+      <button type="submit" name="LED">Turn on LED</button>
+    </form>
+  </body>
+</html>
