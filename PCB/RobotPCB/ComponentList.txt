@@ -1,0 +1,27 @@
+All resistors, capacitors, and LEDs use the 1206 package.
+
+Preliminary Component List:
+1x DRV8835 low-voltage motor driver
+1x JST 2 Pin SMT RA connector
+1x MPU 6050 IMU
+1x SMT USB Mini-B connector
+1x MCP73831/2 LiPo battery charger
+1x TLV757P LDO
+1x ESP-12S
+1x CP2104-F03-GM
+6x 10k Ohm 
+3x 1k Ohm 
+1x 4.7k Ohm 
+1x 2k Ohm 
+2x 3.3k Ohm 
+1x 1 uF electrolytic capacitor (through hole)
+5x 0.1 uF ceramic capacitor 
+3x 1 uF ceramic capacitor 
+3x 10 uF ceramic capacitor 
+1x 2.2 nF ceramic capacitor 
+1x 10 nF ceramic capacitor 
+2x LEDs
+1x PNP transistor Package: SOT23
+1x NPN transistor Package: SOT23
+1x MBR120HW diode Package: SOD123
+2x 8 Pin Header
