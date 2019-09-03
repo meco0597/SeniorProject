@@ -9,11 +9,11 @@ Preliminary Component List:
 1x TLV757P LDO
 1x ESP-12S
 1x CP2104-F03-GM
-6x 10k Ohm 
-3x 1k Ohm 
+7x 10k Ohm 
+4x 1k Ohm 
 1x 4.7k Ohm 
 1x 2k Ohm 
-2x 3.3k Ohm 
+3x 3.3k Ohm 
 1x 1 uF electrolytic capacitor (through hole)
 5x 0.1 uF ceramic capacitor 
 3x 1 uF ceramic capacitor 

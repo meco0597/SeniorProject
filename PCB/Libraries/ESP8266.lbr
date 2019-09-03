@@ -80,9 +80,15 @@
 <smd name="15" x="16" y="13.5" dx="2.6" dy="1.1" layer="1"/>
 <smd name="16" x="16" y="15.5" dx="2.6" dy="1.1" layer="1"/>
 <text x="5" y="2" size="1.27" layer="21" rot="R90">&gt;NAME</text>
-<text x="4.708" y="20" size="1.27" layer="21">ESP-12S</text>
+<text x="4.708" y="20" size="1.27" layer="21">ESP-12F</text>
 <rectangle x1="0" y1="17.8" x2="16" y2="24" layer="39"/>
 <circle x="1" y="17" radius="0.565684375" width="0.1524" layer="21"/>
+<smd name="17" x="3" y="0" dx="1.1" dy="2" layer="1" rot="R180"/>
+<smd name="18" x="5" y="0" dx="1.1" dy="2" layer="1" rot="R180"/>
+<smd name="19" x="7" y="0" dx="1.1" dy="2" layer="1" rot="R180"/>
+<smd name="20" x="9" y="0" dx="1.1" dy="2" layer="1" rot="R180"/>
+<smd name="21" x="11" y="0" dx="1.1" dy="2" layer="1" rot="R180"/>
+<smd name="22" x="13" y="0" dx="1.1" dy="2" layer="1" rot="R180"/>
 </package>
 </packages>
 <symbols>

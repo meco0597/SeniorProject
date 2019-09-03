@@ -130,11 +130,9 @@
 <device name="" package="ESP8266-ESP12">
 <connects>
 <connect gate="G$1" pin="ADC" pad="2"/>
-<connect gate="G$1" pin="CS0" pad="9"/>
 <connect gate="G$1" pin="EN" pad="3"/>
 <connect gate="G$1" pin="GND" pad="15"/>
 <connect gate="G$1" pin="GPIO0" pad="18"/>
-<connect gate="G$1" pin="GPIO10" pad="12"/>
 <connect gate="G$1" pin="GPIO12" pad="6"/>
 <connect gate="G$1" pin="GPIO13" pad="7"/>
 <connect gate="G$1" pin="GPIO14" pad="5"/>
@@ -143,12 +141,8 @@
 <connect gate="G$1" pin="GPIO2" pad="17"/>
 <connect gate="G$1" pin="GPIO4" pad="19"/>
 <connect gate="G$1" pin="GPIO5" pad="20"/>
-<connect gate="G$1" pin="GPIO9" pad="11"/>
-<connect gate="G$1" pin="MISO" pad="10"/>
-<connect gate="G$1" pin="MOSI" pad="13"/>
 <connect gate="G$1" pin="RST" pad="1"/>
 <connect gate="G$1" pin="RXD" pad="21"/>
-<connect gate="G$1" pin="SCLK" pad="14"/>
 <connect gate="G$1" pin="TXD" pad="22"/>
 <connect gate="G$1" pin="VCC" pad="8"/>
 </connects>
