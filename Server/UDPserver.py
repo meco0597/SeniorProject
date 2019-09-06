@@ -1,6 +1,5 @@
 import socket
 import threading
-import json
 
 
 class udpServer():
@@ -43,8 +42,7 @@ class udpServer():
             data, addr = self.sock.recvfrom(1024)
             # call the handler for new data recieved
             if data:
-                dataObj = json.loads(data)
-                self.messageRecievedDelegate(dataObj, addr)
+                self.messageRecievedDelegate(data, addr)
             for address in sendBuff:
                 # if there is information to send back then send it
                 if sendBuff[address] != "":
