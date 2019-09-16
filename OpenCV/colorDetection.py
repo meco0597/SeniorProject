@@ -13,22 +13,22 @@ rawCapture = PiRGBArray(camera, size=(640, 480))
 # allow the camera to warmup
 time.sleep(0.1)
 
+# define the list of color ranges
+colorRanges = [
+    ([17, 15, 100], [50, 56, 200]), # red
+    ([86, 31, 4], [220, 88, 50]), # blue
+    ([25, 146, 190], [62, 174, 250]), # yellow
+    ([103, 86, 65], [145, 133, 128]) # gray
+]
+
 # capture frames from the camera
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 	# grab the raw NumPy array representing the image, then initialize the timestamp
 	# and occupied/unoccupied text
 	image = frame.array
-
-    # define the list of color ranges
-    colorRanges = [
-        ([17, 15, 100], [50, 56, 200]), # red
-        ([86, 31, 4], [220, 88, 50]), # blue
-        ([25, 146, 190], [62, 174, 250]), # yellow
-        ([103, 86, 65], [145, 133, 128]) # gray
-    ]
     
     # loop over the boundaries
-    for (lower, upper) in boundaries:
+    for (lower, upper) in colorRanges:
         # create NumPy arrays from the boundaries
         lower = np.array(lower, dtype = "uint8")
         upper = np.array(upper, dtype = "uint8")
