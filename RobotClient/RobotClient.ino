@@ -29,10 +29,12 @@ const IPAddress BROADCAST_ADDRESS(192, 168, 1, 255);
 const IPAddress MULTICAST_ADDRESS(224, 0, 0, 0);
 #define UDP_PORT 5050
 #define MAX_PACKET_SIZE  1023
-#define AIN1_PIN 12
-#define AIN2_PIN 13
+#define AIN1_PIN 4
+#define AIN2_PIN 5
 #define BIN1_PIN 14
 #define BIN2_PIN 16
+#define I2C_SCL 12
+#define I2C_SDA 13
 #define PWM_MAX 1023 
 #define MPU_INTERRUPT_PIN 2 
 #define ID_SIZE 4
@@ -54,8 +56,8 @@ const IPAddress MULTICAST_ADDRESS(224, 0, 0, 0);
 #define ASSIGN 0x01
 #define MOVE 0x04
 #define STOP 0x08
-#define READ 0xF0
 #define WRITE 0xE0
+#define READ 0xF0
 #define ACCEL_X 0xF1
 #define ACCEL_Y 0xF2
 #define ACCEL_Z 0xF3
@@ -67,11 +69,14 @@ const IPAddress MULTICAST_ADDRESS(224, 0, 0, 0);
 #define POS_Z 0xF9
 #define BAT_CHARGE 0xFA
 #define TEMP 0xFB
+#define THROTTLE 0xFC
+#define LIGHT 0xFF
 /*************************************************/
 
 /******************** Globals ********************/
 WiFiUDP UDP;
 unsigned int robotID = 0;
+unsigned int motorThrottle = 1023;
 /*************************************************/
 
 
@@ -104,7 +109,9 @@ void setup() {
   Serial.print("Subscribed to multicast address ");
   Serial.println(MULTICAST_ADDRESS);
   
-  pinMode(0, OUTPUT); 
+  pinMode(0, OUTPUT);
+  pinMode(2, OUTPUT); 
+  digitalWrite(2, HIGH);
   
   // OTA updating stuff
   ArduinoOTA.setPort(5051);
@@ -165,10 +172,10 @@ void setMotors(RobotCommand *cmd) {
   // Check upper 6 bits
   switch (cmd->opCode & 0xFC) {
     case MOVE:
-      analogWrite(AIN1_PIN, (cmd->opCode & 0x01) ? cmd->param2 : 0);
-      analogWrite(AIN2_PIN, (cmd->opCode & 0x01) ? 0 : cmd->param2);
-      analogWrite(BIN1_PIN, (cmd->opCode & 0x02) ? cmd->param1 : 0);
-      analogWrite(BIN2_PIN, (cmd->opCode & 0x02) ? 0 : cmd->param1);
+      analogWrite(AIN1_PIN, (cmd->opCode & 0x01) ? min(cmd->param2, motorThrottle) : 0);
+      analogWrite(AIN2_PIN, (cmd->opCode & 0x01) ? 0 : min(cmd->param2, motorThrottle));
+      analogWrite(BIN1_PIN, (cmd->opCode & 0x02) ? min(cmd->param1, motorThrottle) : 0);
+      analogWrite(BIN2_PIN, (cmd->opCode & 0x02) ? 0 : min(cmd->param1, motorThrottle));
       break;
     case STOP: 
       analogWrite(AIN1_PIN, PWMRANGE);
@@ -186,7 +193,19 @@ void setMotors(RobotCommand *cmd) {
 
 // Sends the requested information back to the hub
 void sendInformation(RobotCommand *cmd) {
-  
+  // param1 determines what to send
+  switch (cmd->param1) {
+    case BAT_CHARGE:
+      char data[4];
+      dtostrf(getBatVoltage(), 4, 2, data);
+      sendUDP((byte*)data, 4);
+      break;
+  }
+}
+
+// Needs to be configured for different resistor values
+float getBatVoltage() {
+  return (analogRead(A0) / 1023.0) * 5.86;
 }
 
 void loop() {
@@ -206,6 +225,15 @@ void loop() {
           break;
         case READ: 
           sendInformation(&cmd);
+          break;
+        case WRITE:
+          switch (cmd.param1) {
+            case THROTTLE:
+              motorThrottle = cmd.param2;
+              break;
+          }
+        case LIGHT:
+          analogWrite(2, PWMRANGE - cmd.param1);
           break;
         default: setMotors(&cmd);
       }
@@ -227,6 +255,10 @@ void loop() {
   }
   */
 
+  digitalWrite(0, HIGH);
+
   ArduinoOTA.handle();
-  delay(1);
+  delay(100);
+
+  digitalWrite(0, LOW);
 }
