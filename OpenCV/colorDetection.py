@@ -23,9 +23,9 @@ colorRanges = [
 
 # capture frames from the camera
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-	# grab the raw NumPy array representing the image, then initialize the timestamp
-	# and occupied/unoccupied text
-	image = frame.array
+    # grab the raw NumPy array representing the image, then initialize the timestamp
+    # and occupied/unoccupied text
+    image = frame.array
 
     # loop over the boundaries
     for (lower, upper) in colorRanges:
@@ -40,7 +40,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
         # show the images
         cv2.imshow("images", np.hstack([image, output]))
-        cv2.waitKey(0)
+        cv2.waitKey(20)
     
 	# clear the stream in preparation for the next frame
 	rawCapture.truncate(0)
