@@ -1,9 +1,12 @@
 # import the necessary packages
-import numpy as np
+from picamera.array import PiRGBArray
+from picamera import PiCamera
 import time
 import cv2
 
-camera = cv2.VideoCapture(0)
+camera = PiCamera()
+camera.resolution(640, 480)
+rawCapture = PiRGBArray(camera)
 
 # allow the camera to warmup
 time.sleep(0.1)
@@ -15,10 +18,9 @@ colorRanges = [
     ([36, 50, 50], [70, 255, 255])
 ]
 
-while(True):
+for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     start_time = time.time()
-    ret, originalImage = camera.read()
-    image = cv2.cvtColor(originalImage, cv2.COLOR_BGR2HSV)
+    image = frame.array
     masks = []
 
     # loop over the boundaries
@@ -42,7 +44,8 @@ while(True):
     print("-----" + str(time.time() - start_time) + " seconds ------")
     # show the images
     cv2.imshow("images", np.hstack([originalImage, outputGreen]))
-    cv2.waitKey(50)
+    cv2.waitKey(1000)
+    rawCapture.truncate(0)
 
 camera.release()
 cv2.destroyAllWindows()
