@@ -1,0 +1,12 @@
+DC Gear Motor Dim
+
+H - 1 in
+L - 0.04 ft
+W - 0.03 ft
+
+Diameter - 0.04ft
+
+Shaft - 0.03ft
+Shaft diameter - 0.01ft
+Shaft from flat to outside edge - 0.0085ft
+
