@@ -1,11 +1,12 @@
 # import the necessary packages
 from picamera.array import PiRGBArray
+import numpy as np
 from picamera import PiCamera
 import time
 import cv2
 
 camera = PiCamera()
-camera.resolution(640, 480)
+camera.resolution = (640, 480)
 rawCapture = PiRGBArray(camera)
 
 # allow the camera to warmup
@@ -15,12 +16,13 @@ time.sleep(0.1)
 colorRanges = [
     ([0, 50, 50], [20, 255, 255]),# red
     ([160, 50, 50], [180, 255, 255]),
-    ([36, 50, 50], [70, 255, 255])
+    ([30, 75, 75], [80, 255, 255])
 ]
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     start_time = time.time()
     image = frame.array
+    hsvImage = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     masks = []
 
     # loop over the boundaries
@@ -31,7 +33,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
         # find the colors within the specified boundaries and apply
         # the mask
-        masks.append(cv2.inRange(image, lower, upper))
+        masks.append(cv2.inRange(hsvImage, lower, upper))
         
     #overallMask = masks[0]
     #for mask in masks:
@@ -39,12 +41,12 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     redMask = cv2.bitwise_or(masks[0], masks[1])
     
-    #outputRed = cv2.bitwise_and(image, image, mask=redMask)
-    outputGreen = cv2.bitwise_and(image, image, mask=masks[2])
-    print("-----" + str(time.time() - start_time) + " seconds ------")
+    outputRed = cv2.bitwise_and(hsvImage, hsvImage, mask=redMask)
+    #outputGreen = cv2.bitwise_and(hsvImage, hsvImage, mask=masks[2])
+    print("-----" + str(time.time() - start_time) + " seconds -----")
     # show the images
-    cv2.imshow("images", np.hstack([originalImage, outputGreen]))
-    cv2.waitKey(1000)
+    cv2.imshow("images", np.hstack([image, outputRed]))
+    cv2.waitKey(50)
     rawCapture.truncate(0)
 
 camera.release()
