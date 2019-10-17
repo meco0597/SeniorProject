@@ -1,0 +1,29 @@
+Team: BumperCarSumo
+
+Date: 7 Oct 2019
+
+Overall project completion status:  60%
+
+Outstanding issues and risks: Soldering complications, Pi Camera and Raspberry Pi cooperation (last time the Pi Camera shorted something that caused the Pi to become corrupted), shell dimensions and part selection
+
+
+
+=== Individual Updates ===
+
+Team Member: Jaden Simon
+Task: Test New PCB
+Completion status: 90%
+Comments (if any):
+
+
+Team Member: Melvin Bosnjak
+Task: Continue with OpenCV
+Completion status: 60%
+Comments (if any):  
+
+
+Team Member: Daniel Humeniuk
+Task: Design shell for robots, track new motor parts
+Completion: 60%
+Comments (if any): 
+

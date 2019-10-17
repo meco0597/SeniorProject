@@ -1,0 +1,13 @@
+DC Gear Motor Dim
+
+L - 1 in (total length from gears to back of motor)
+L of gear section - 0.03 ft
+H - 0.03 ft
+W - 0.04 ft
+
+Diameter - 0.04ft
+
+Shaft - 0.03ft
+Shaft diameter - 0.01ft
+Shaft from flat to outside edge - 0.0085ft
+

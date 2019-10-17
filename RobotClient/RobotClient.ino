@@ -14,15 +14,19 @@
 // Robot communication protocol:
 // [ID] [COMMAND] [PARAMETER1] [PARAMETER2]
 // [4 bits] [8 bits] [10 bits] [10 bits]
-// 4 bytes total
+// 4 bytes totalm
 
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include <ESP8266mDNS.h>
+#include <ESP8266HTTPClient.h>
+#include <ESP8266httpUpdate.h>
 #include <ArduinoOTA.h>
 #include "FS.h" 
 
 /******************* Constants *******************/
+const int FW_VERSION = 2;
+const char* FW_URL = "http://192.168.1.66:8080/fota/";
 const char* HUB_SSID = "Texans";
 const char* HUB_PASSWORD = "Rockets123459876";
 const IPAddress BROADCAST_ADDRESS(192, 168, 1, 255);
@@ -54,6 +58,7 @@ const IPAddress MULTICAST_ADDRESS(224, 0, 0, 0);
 
 /******************* Commands  *******************/
 #define ASSIGN 0x01
+#define UPDATE 0x02
 #define MOVE 0x04
 #define STOP 0x08
 #define WRITE 0xE0
@@ -76,7 +81,7 @@ const IPAddress MULTICAST_ADDRESS(224, 0, 0, 0);
 /******************** Globals ********************/
 WiFiUDP UDP;
 unsigned int robotID = 0;
-unsigned int motorThrottle = 1023;
+int16_t motorThrottle = 1023;
 /*************************************************/
 
 
@@ -89,6 +94,7 @@ struct RobotCommand {
 
 void setup() {
   Serial.begin(115200);
+  Serial.println("Current version: " + (String)FW_VERSION);
   
   // Connect to the hub
   WiFi.begin(HUB_SSID, HUB_PASSWORD);
@@ -114,8 +120,8 @@ void setup() {
   digitalWrite(2, HIGH);
   
   // OTA updating stuff
-  ArduinoOTA.setPort(5051);
-  ArduinoOTA.begin();
+  //ArduinoOTA.setPort(5051);
+  //ArduinoOTA.begin();
 
   // File system test code
   /*
@@ -133,6 +139,23 @@ void setup() {
     Serial.println("No data was found.");
   }
   */
+}
+
+void checkForUpdates() {
+  Serial.println("Checking for firmware updates..." );
+
+  HTTPClient httpClient;
+  httpClient.begin((String)FW_URL + "robotclient.version");
+  int httpCode = httpClient.GET();
+  if( httpCode == 200 ) {
+    String newFWVersion = httpClient.getString();
+  
+    if (newFWVersion.toInt() > FW_VERSION) {
+      Serial.println("Updating to version " + newFWVersion);
+      ESPhttpUpdate.update((String)FW_URL + "robotclient.bin");
+    }
+  }
+  httpClient.end();
 }
 
 // Retrieves a command from a UDP packet
@@ -223,6 +246,9 @@ void loop() {
         case ASSIGN: 
           robotID = cmd.id;
           break;
+        case UPDATE:
+          checkForUpdates();
+          break;
         case READ: 
           sendInformation(&cmd);
           break;
@@ -257,7 +283,6 @@ void loop() {
 
   digitalWrite(0, HIGH);
 
-  ArduinoOTA.handle();
   delay(100);
 
   digitalWrite(0, LOW);

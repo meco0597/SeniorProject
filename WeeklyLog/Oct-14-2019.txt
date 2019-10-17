@@ -1,0 +1,29 @@
+Team: BumperCarSumo
+
+Date: 14 Oct 2019
+
+Overall project completion status:  65%
+
+Outstanding issues and risks: Pi Camera and Raspberry Pi cooperation (last time the Pi Camera shorted something that caused the Pi to become corrupted), shell dimensions and part selection
+
+
+
+=== Individual Updates ===
+
+Team Member: Jaden Simon
+Task: Test motor driver with DC Motors (one with gears, one without gears)
+Completion status: 60%
+Comments (if any):
+
+
+Team Member: Melvin Bosnjak
+Task: Continue with OpenCV, integrate Pi Camera
+Completion status: 80%
+Comments (if any):  
+
+
+Team Member: Daniel Humeniuk
+Task: Design review for shell, procurement of new battery/wii balance board
+Completion: 80%
+Comments (if any): 
+
