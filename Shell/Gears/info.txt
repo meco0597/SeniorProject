@@ -1,0 +1,20 @@
+Some random information
+
+Motor Gear: 2662N14 (Inner Diameter 0.106in)
+Compound Gear: 2662N14 + 2662N15 (Inner Diameter 0.288in)
+Each compound gear doubles the gear ratio
+Currently using 5 gears for 16:1 ratio
+
+Meshed gear center distance -> 0.57in (near perfect fit)
+Brass rods -> 2mm
+Axle -> 2mm
+
+Gear Test Mount 1 -> 0.35in X 0.45 Y
+Gear Test Mount 2 -> 0.9 Y
+This is offset from the motor axle
+Can do other designs, but must have some combination of
+0.57in diagonals that meet at wheel axle while respecting collisions
+
+Washers are 2mm thick
+
+M2.5 screws need 0.2in space for head

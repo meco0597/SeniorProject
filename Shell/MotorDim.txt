@@ -10,4 +10,3 @@ Diameter - 0.04ft
 Shaft - 0.03ft
 Shaft diameter - 0.01ft
 Shaft from flat to outside edge - 0.0085ft
-
