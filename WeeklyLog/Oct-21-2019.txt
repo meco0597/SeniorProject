@@ -1,0 +1,31 @@
+Team: BumperCarSumo
+
+Date: 21 Oct 2019
+
+Overall project completion status:  70%
+
+Outstanding issues and risks: Shell creation/gears with motor design issues, communication latency with ESP-12s and Rasp Pi
+
+
+
+=== Individual Updates ===
+
+Team Member: Melvin
+Tasks: Protocol with ESP-12 and Rasp Pi
+Completion status: 70%
+Outstanding issues and risks: Noise interference 
+
+
+Team Member: Jaden
+Tasks: Shell printing/gears, DC motor throttling
+Completion status: 55%
+Outstanding issues and risks: First time printing troubleshooting
+
+
+
+Team Member: Daniel
+Tasks: Shell printing/gears, screw/DC Motor/Component procurement
+Completion status: 50%
+Outstanding issues and risks: Finding screws for DC motor for mounting, getting 
+
+
