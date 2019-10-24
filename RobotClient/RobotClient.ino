@@ -11,10 +11,18 @@
 // and the next bit determines the direction of the left motor (1 is forward)
 // e.x. 00001110 is forward for the left motor and backwards for the right
 
+// Read battery level: 0F 03 E8 00
+// Set both motors to 500/1023 * vBat: 00 47 C1 F4
+
 // Robot communication protocol:
 // [ID] [COMMAND] [PARAMETER1] [PARAMETER2]
 // [4 bits] [8 bits] [10 bits] [10 bits]
-// 4 bytes totalm
+// 4 bytes total
+
+// TODO: MPU library + integration
+// TODO: Motor stall detection
+// TODO: Read/Write operations
+// TODO: Documentation :)
 
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
@@ -22,7 +30,7 @@
 #include <ESP8266HTTPClient.h>
 #include <ESP8266httpUpdate.h>
 #include <ArduinoOTA.h>
-#include "FS.h" 
+#include "MotorController.h"
 
 /******************* Constants *******************/
 const int FW_VERSION = 2;
@@ -45,6 +53,8 @@ const IPAddress MULTICAST_ADDRESS(224, 0, 0, 0);
 #define OP_SIZE 8
 #define PARAM_SIZE 10
 #define CMD_SIZE 32
+#define BAT_ALPHA 0.95
+#define MAX_BAT 4.3
 /*************************************************/
 
 /******************** Macros  ********************/
@@ -80,10 +90,10 @@ const IPAddress MULTICAST_ADDRESS(224, 0, 0, 0);
 
 /******************** Globals ********************/
 WiFiUDP UDP;
+MotorController motorController(AIN1_PIN, AIN2_PIN, BIN1_PIN, BIN2_PIN);
 unsigned int robotID = 0;
-int16_t motorThrottle = 1023;
+float batVoltage = 0;
 /*************************************************/
-
 
 struct RobotCommand {
   byte id;
@@ -122,23 +132,6 @@ void setup() {
   // OTA updating stuff
   //ArduinoOTA.setPort(5051);
   //ArduinoOTA.begin();
-
-  // File system test code
-  /*
-  SPIFFS.begin();
-
-  ArduinoOTA.onStart([]() {
-    SPIFFS.end();
-  });
-
-  File data = SPIFFS.open("/cfg.txt", "r");
-  if (data) {
-    Serial.println("Online for " + String(data.parseInt()) + " minutes.");
-    data.close();
-  } else {
-    Serial.println("No data was found.");
-  }
-  */
 }
 
 void checkForUpdates() {
@@ -190,37 +183,13 @@ void sendUDP(byte* data, int len) {
   UDP.endPacket();
 }
 
-// Sets the motor driver corresponding to the move command
-void setMotors(RobotCommand *cmd) {
-  // Check upper 6 bits
-  switch (cmd->opCode & 0xFC) {
-    case MOVE:
-      analogWrite(AIN1_PIN, (cmd->opCode & 0x01) ? min(cmd->param2, motorThrottle) : 0);
-      analogWrite(AIN2_PIN, (cmd->opCode & 0x01) ? 0 : min(cmd->param2, motorThrottle));
-      analogWrite(BIN1_PIN, (cmd->opCode & 0x02) ? min(cmd->param1, motorThrottle) : 0);
-      analogWrite(BIN2_PIN, (cmd->opCode & 0x02) ? 0 : min(cmd->param1, motorThrottle));
-      break;
-    case STOP: 
-      analogWrite(AIN1_PIN, PWMRANGE);
-      analogWrite(AIN2_PIN, PWMRANGE);
-      analogWrite(BIN1_PIN, PWMRANGE);
-      analogWrite(BIN2_PIN, PWMRANGE); 
-      break;
-    default:
-      analogWrite(AIN1_PIN, 0);
-      analogWrite(AIN2_PIN, 0);
-      analogWrite(BIN1_PIN, 0);
-      analogWrite(BIN2_PIN, 0);
-  }
-}
-
 // Sends the requested information back to the hub
 void sendInformation(RobotCommand *cmd) {
   // param1 determines what to send
   switch (cmd->param1) {
     case BAT_CHARGE:
       char data[4];
-      dtostrf(getBatVoltage(), 4, 2, data);
+      dtostrf(batVoltage, 4, 2, data);
       sendUDP((byte*)data, 4);
       break;
   }
@@ -228,20 +197,20 @@ void sendInformation(RobotCommand *cmd) {
 
 // Needs to be configured for different resistor values
 float getBatVoltage() {
-  return (analogRead(A0) / 1023.0) * 5.86;
+  return (analogRead(A0) / 1023.0) * 4.3;
 }
 
-void loop() {
-  // Poll for commands from the hub
+void processRobotCommand() {
   RobotCommand cmd;
-  if (UDP.parsePacket()) {
-    if (getCommand(&cmd)) {
+  
+  if (getCommand(&cmd)) {
       Serial.println("Received command: ");
       Serial.println("ID: " + String((int)cmd.id));
       Serial.println("OpCode: " + String((int)cmd.opCode));
       Serial.println("Param1: " + String(cmd.param1));
       Serial.println("Param2: " + String(cmd.param2));
 
+      // Check for normal operations
       switch (cmd.opCode) {
         case ASSIGN: 
           robotID = cmd.id;
@@ -255,35 +224,53 @@ void loop() {
         case WRITE:
           switch (cmd.param1) {
             case THROTTLE:
-              motorThrottle = cmd.param2;
+              motorController.setThrottle(cmd.param2);
               break;
           }
         case LIGHT:
           analogWrite(2, PWMRANGE - cmd.param1);
           break;
-        default: setMotors(&cmd);
+        default:
+          break;
       }
-    }
+
+      // Check for motor operations
+      switch (cmd.opCode & 0xFC) {
+        case MOVE: {
+          // Set and invert PWM goals based on direction
+          int rightGoal = (cmd.opCode & 0x01) ? -(int)cmd.param2 : (int)cmd.param2;
+          int leftGoal = (cmd.opCode & 0x02) ? -(int)cmd.param1 : (int)cmd.param1;
+
+          // Scale goals based on current battery voltage
+          // This allows the goal voltage to scale along with the battery voltage, so an almost dead robot won't be as slow as a fresh one
+          rightGoal = rightGoal * (MAX_BAT / batVoltage);
+          leftGoal = leftGoal * (MAX_BAT / batVoltage);
+          
+          motorController.setGoal(rightGoal, leftGoal);
+          break;
+        }
+        case STOP:
+          motorController.toggleStop();
+          break;
+        default:
+          break;
+      }
+   }
+}
+
+void loop() {
+  
+  // Poll for commands from the hub
+  if (UDP.parsePacket()) {
+    processRobotCommand();
   }
   
-  // File system test code
-  /*
-  counter++;
-  if (counter == 3000) {
-    counter = 0;
-    counter2++;
-    File data = SPIFFS.open("/cfg.txt", "w");
-    if (data) {
-      data.print(String(counter2));
-      Serial.println("Wrote to memory.");
-      data.close();
-    }
-  }
-  */
+  motorController.updateVoltage(0.25);
+  batVoltage = (batVoltage * BAT_ALPHA) + (getBatVoltage() * (1 - BAT_ALPHA));
 
   digitalWrite(0, HIGH);
 
-  delay(100);
+  delay(10); // Allows wifi code to run!
 
   digitalWrite(0, LOW);
 }
