@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.2.2">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -39,7 +39,7 @@
 <layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
@@ -55,7 +55,7 @@
 <layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
-<layer number="100" name="NonViaHole" color="14" fill="1" visible="yes" active="yes"/>
+<layer number="100" name="NonViaHole" color="14" fill="1" visible="no" active="yes"/>
 <layer number="101" name="PlacementGuide" color="7" fill="1" visible="no" active="yes"/>
 <layer number="200" name="200bmp" color="1" fill="10" visible="no" active="yes"/>
 <layer number="201" name="201bmp" color="2" fill="10" visible="no" active="yes"/>
@@ -467,6 +467,9 @@ TS-003</description>
 <wire x1="1.5" y1="-1" x2="1.5" y2="-0.45" width="0.05" layer="21"/>
 <wire x1="1.5" y1="-0.05" x2="1.5" y2="0.05" width="0.05" layer="21"/>
 <wire x1="-1.5" y1="-0.05" x2="-1.5" y2="0.05" width="0.05" layer="21"/>
+<hole x="0" y="0" drill="0.15"/>
+<hole x="-0.7" y="0" drill="0.15"/>
+<hole x="0.7" y="0" drill="0.15"/>
 <wire x1="-1.35" y1="0.6" x2="-1.05" y2="0.6" width="0.05" layer="21"/>
 <wire x1="-1.05" y1="0.6" x2="-1.05" y2="0.9" width="0.05" layer="21"/>
 <rectangle x1="-0.46" y1="0.63" x2="-0.04" y2="1.27" layer="29"/>
@@ -488,9 +491,6 @@ TS-003</description>
 <rectangle x1="-1.05" y1="-0.52" x2="1.05" y2="0.52" layer="29"/>
 <text x="0" y="1.45" size="0.8128" layer="25" font="vector" align="bottom-center">&gt;NAME</text>
 <text x="0" y="-1.45" size="0.8128" layer="27" font="vector" rot="R180" align="bottom-center">&gt;VALUE</text>
-<pad name="PAD5" x="-0.635" y="0" drill="0.254" diameter="0.508" shape="square"/>
-<pad name="PAD6" x="0" y="0" drill="0.254" diameter="0.508" shape="square"/>
-<pad name="PAD7" x="0.635" y="0" drill="0.254" diameter="0.508" shape="square"/>
 </package>
 </packages>
 <symbols>
@@ -723,7 +723,7 @@ gate drive voltages.&lt;/p&gt;
 <connect gate="G$1" pin="BOUT1" pad="4"/>
 <connect gate="G$1" pin="BOUT2" pad="5"/>
 <connect gate="G$1" pin="GND1" pad="6"/>
-<connect gate="G$1" pin="GND2" pad="PAD PAD5 PAD6 PAD7"/>
+<connect gate="G$1" pin="GND2" pad="PAD"/>
 <connect gate="G$1" pin="MODE" pad="11"/>
 <connect gate="G$1" pin="PAD1" pad="PAD1"/>
 <connect gate="G$1" pin="PAD2" pad="PAD2"/>

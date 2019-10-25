@@ -9001,9 +9001,6 @@ DIN A4, landscape with location and doc. field</description>
 <wire x1="1.5" y1="-1" x2="1.5" y2="-0.45" width="0.05" layer="21"/>
 <wire x1="1.5" y1="-0.05" x2="1.5" y2="0.05" width="0.05" layer="21"/>
 <wire x1="-1.5" y1="-0.05" x2="-1.5" y2="0.05" width="0.05" layer="21"/>
-<hole x="0" y="0" drill="0.15"/>
-<hole x="-0.7" y="0" drill="0.15"/>
-<hole x="0.7" y="0" drill="0.15"/>
 <wire x1="-1.35" y1="0.6" x2="-1.05" y2="0.6" width="0.05" layer="21"/>
 <wire x1="-1.05" y1="0.6" x2="-1.05" y2="0.9" width="0.05" layer="21"/>
 <rectangle x1="-0.46" y1="0.63" x2="-0.04" y2="1.27" layer="29"/>
@@ -9025,6 +9022,9 @@ DIN A4, landscape with location and doc. field</description>
 <rectangle x1="-1.05" y1="-0.52" x2="1.05" y2="0.52" layer="29"/>
 <text x="0" y="1.45" size="0.8128" layer="25" font="vector" align="bottom-center">&gt;NAME</text>
 <text x="0" y="-1.45" size="0.8128" layer="27" font="vector" rot="R180" align="bottom-center">&gt;VALUE</text>
+<pad name="PAD5" x="-0.635" y="0" drill="0.254" diameter="0.508" shape="square" thermals="no"/>
+<pad name="PAD6" x="0" y="0" drill="0.254" diameter="0.508" shape="square" thermals="no"/>
+<pad name="PAD7" x="0.635" y="0" drill="0.254" diameter="0.508" shape="square" thermals="no"/>
 </package>
 </packages>
 <symbols>
@@ -9102,7 +9102,7 @@ gate drive voltages.&lt;/p&gt;
 <connect gate="G$1" pin="BOUT1" pad="4"/>
 <connect gate="G$1" pin="BOUT2" pad="5"/>
 <connect gate="G$1" pin="GND1" pad="6"/>
-<connect gate="G$1" pin="GND2" pad="PAD"/>
+<connect gate="G$1" pin="GND2" pad="PAD PAD5 PAD6 PAD7"/>
 <connect gate="G$1" pin="MODE" pad="11"/>
 <connect gate="G$1" pin="PAD1" pad="PAD1"/>
 <connect gate="G$1" pin="PAD2" pad="PAD2"/>
