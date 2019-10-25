@@ -17,10 +17,8 @@ void setup(){
   Wire.write(0x75);  // starting with register 0x3B (ACCEL_XOUT_H)
   Wire.endTransmission(false); // done talking to MPU for the time being
   Wire.requestFrom(MPU_addr,1,true);  // request a total of 14 registers
-  Serial.println("xxxx");
-  Serial.println("Stuff: ");
+  Serial.println("\n");
   Serial.print(Wire.read());
-  Serial.println("xxxx");
 }
 void loop(){ // main program loop
   Wire.beginTransmission(MPU_addr); // get ready to talk to MPU again
@@ -46,5 +44,5 @@ void loop(){ // main program loop
   Serial.print(" | GyX = "); Serial.print(GyX); // share gyroscope values over debug channel
   Serial.print(" | GyY = "); Serial.print(GyY);
   Serial.print(" | GyZ = "); Serial.println(GyZ);
-  delay(33300); // delay a bit to not overwhelm you the user/programmer as you view the results
+  delay(2500); // delay a bit to not overwhelm you the user/programmer as you view the results
 }

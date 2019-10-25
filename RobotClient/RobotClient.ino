@@ -178,7 +178,7 @@ bool getCommand(RobotCommand *cmd) {
 
 // Sends information back to the hub 
 void sendUDP(byte* data, int len) {
-  UDP.beginPacket(UDP.remoteIP(), UDP.remotePort());
+  UDP.beginPacket(UDP.remoteIP(), 5051);
   UDP.write(data, len);
   UDP.endPacket();
 }
