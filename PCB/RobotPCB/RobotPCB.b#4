@@ -1508,9 +1508,6 @@ http://www.invensense.com&lt;p&gt;
 <wire x1="1.5" y1="-1" x2="1.5" y2="-0.45" width="0.05" layer="21"/>
 <wire x1="1.5" y1="-0.05" x2="1.5" y2="0.05" width="0.05" layer="21"/>
 <wire x1="-1.5" y1="-0.05" x2="-1.5" y2="0.05" width="0.05" layer="21"/>
-<hole x="0" y="0" drill="0.15"/>
-<hole x="-0.7" y="0" drill="0.15"/>
-<hole x="0.7" y="0" drill="0.15"/>
 <wire x1="-1.35" y1="0.6" x2="-1.05" y2="0.6" width="0.05" layer="21"/>
 <wire x1="-1.05" y1="0.6" x2="-1.05" y2="0.9" width="0.05" layer="21"/>
 <rectangle x1="-0.46" y1="0.63" x2="-0.04" y2="1.27" layer="29"/>
@@ -1532,6 +1529,9 @@ http://www.invensense.com&lt;p&gt;
 <rectangle x1="-1.05" y1="-0.52" x2="1.05" y2="0.52" layer="29"/>
 <text x="0" y="1.45" size="0.8128" layer="25" font="vector" align="bottom-center">&gt;NAME</text>
 <text x="0" y="-1.45" size="0.8128" layer="27" font="vector" rot="R180" align="bottom-center">&gt;VALUE</text>
+<pad name="PAD5" x="-0.635" y="0" drill="0.254" diameter="0.508" shape="square" thermals="no"/>
+<pad name="PAD6" x="0" y="0" drill="0.254" diameter="0.508" shape="square" thermals="no"/>
+<pad name="PAD7" x="0.635" y="0" drill="0.254" diameter="0.508" shape="square" thermals="no"/>
 </package>
 </packages>
 </library>
@@ -2452,6 +2452,9 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <via x="35.306" y="23.495" extent="1-16" drill="0.35"/>
 <contactref element="CN2" pad="2"/>
 <contactref element="C15" pad="2"/>
+<contactref element="U1" pad="PAD5"/>
+<contactref element="U1" pad="PAD6"/>
+<contactref element="U1" pad="PAD7"/>
 </signal>
 <signal name="VCC">
 <contactref element="U1" pad="12"/>
@@ -2551,8 +2554,7 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <signal name="MOUTB1">
 <contactref element="U1" pad="4"/>
 <contactref element="U$4" pad="1"/>
-<wire x1="26.35" y1="15.49" x2="28.317" y2="15.49" width="0.254" layer="1"/>
-<wire x1="28.317" y1="15.49" x2="29.21" y2="16.383" width="0.381" layer="1"/>
+<wire x1="29.21" y1="16.383" x2="28.317" y2="15.49" width="0.381" layer="1"/>
 <wire x1="29.21" y1="16.383" x2="29.21" y2="17.399" width="0.381" layer="1"/>
 <wire x1="29.21" y1="17.399" x2="28.6258" y2="17.9832" width="0.381" layer="1"/>
 <wire x1="28.6258" y1="17.9832" x2="17.5768" y2="17.9832" width="0.381" layer="1"/>
@@ -2560,6 +2562,7 @@ Note, that not all DRC settings must be set by the manufacturer. Several can be 
 <wire x1="11.43" y1="18.923" x2="3.048" y2="27.305" width="0.381" layer="1"/>
 <wire x1="3.048" y1="27.305" x2="2.54" y2="27.305" width="0.381" layer="1"/>
 <wire x1="17.5768" y1="17.9832" x2="16.637" y2="18.923" width="0.381" layer="1"/>
+<wire x1="28.317" y1="15.49" x2="26.35" y2="15.49" width="0.254" layer="1"/>
 </signal>
 <signal name="MOUTB2">
 <contactref element="U1" pad="5"/>
