@@ -1,0 +1,31 @@
+Team: BumperCarSumo
+
+Date: Oct 28, 2019
+
+Overall project completion status:  70%
+
+Outstanding issues and risks: Gear testing, UDP/Multicast issues
+
+
+
+=== Individual Updates ===
+
+Team Member: Melvin
+Tasks: Multicast packet test, OpenCV refinement 
+Completion status: 80%
+Outstanding issues and risks: Multicast may not be enabled on the Pi, Melvin is looking into documentation on the matter
+
+
+Team Member: Jaden
+Tasks: Gear box testing
+Completion status: 60%
+Outstanding issues and risks: Components were delayed, should be good now
+
+
+
+Team Member: Daniel
+Tasks: Testing Wii Controller code with Multiple Balance Boards, Procuring PCBs and Batteries
+Completion status: %50
+Outstanding issues and risks: Ensuring PCBs have labels on silk screen layer
+
+
