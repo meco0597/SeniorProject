@@ -19,3 +19,6 @@ Washers are 2mm thick
 
 M2.5 screws have 5mm diameter head, 5mm in length
 Inserts use a 0.1425 hole
+
+Axle hole use 0.1in
+Try 0.85in gear space?
