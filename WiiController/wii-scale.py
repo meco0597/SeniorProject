@@ -57,7 +57,7 @@ class WiiController(object):
 
 
 	def start(self, address):
-		print "Wii-Controller started"
+		print "Wii-Controller starting"
 
 		global sleep
 
@@ -69,17 +69,20 @@ class WiiController(object):
 		
 		if self.board1_addr is None:
 			self.board1_addr = address
+			print "Board1 Address Done"
 		elif self.board2_addr is None:
 			self.board2_addr = address
+			print "Board2 Address Done"
 		elif self.board3_addr is None:
 			self.board3_addr = address
+			print "Board3 Address Done"
 		elif self.board4_addr is None:
-			self.board4_addr = None
+			self.board4_addr = address
+			print "Board4 Address Done"
 		else:
 			print "Serious Error"
 
 		board = wiiboard.Wiiboard()
-
 
 		while True:
 			if connected is not board.isConnected():
@@ -94,7 +97,7 @@ class WiiController(object):
 				# Re initialize each run due to bug in wiiboard
 				# Note: Seems to be working though :/
 				board = wiiboard.Wiiboard()
-				
+				print "Connecting to " + address
 				board.connect(address)
 				print "Connecting to ", address
 			if board.isConnected():
@@ -121,7 +124,7 @@ class WiiController(object):
 			if self.board2.isConnected():
 				a = [self.board2.mass.topLeft, self.board2.mass.topRight, self.board2.mass.bottomLeft, self.board2.mass.bottomRight]
 				return a
-		elif address is board3_addr:
+		elif address is self.board3_addr:
 			if self.board3.isConnected():
 				a =  [self.board3.mass.topLeft, self.board3.mass.topRight, self.board3.mass.bottomLeft, self.board3.mass.bottomRight]
 				return a
