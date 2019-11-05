@@ -1,0 +1,30 @@
+Team: BumperCarSumo
+
+Date: 4 Nov 2019
+
+Overall project completion status:  75%
+
+Outstanding issues and risks:
+
+
+
+=== Individual Updates ===
+
+Team Member: Melvin
+Tasks: Integrating BlueTooth for WiiBoards
+Completion status: 50%
+Outstanding issues and risks: Multiple Bluetooth devices causing noise with WiFi
+
+
+Team Member: Jaden
+Tasks: Testing Gear Box
+Completion status: 80%
+Outstanding issues and risks: Found out that the gears need lubrication, will test multiple lubrication
+
+
+Team Member: Dan
+Tasks: Wii Balance Board algorithms
+Completion status: 70%
+Outstanding issues and risks: Delay time with multiple boards may take more time than estimated
+
+
