@@ -1,6 +1,6 @@
 import socket
 import threading
-
+import struct
 
 class udpServer():
 
@@ -47,6 +47,18 @@ class udpServer():
                 # if there is information to send back then send it
                 if sendBuff[address] != "":
                     self.sock.sendto(bytes(sendBuff[address]), addr)
+
+
+    # This will broadcast data to a multicast ip
+    def broadcast(self, data, multicastIP, port):
+        multicast_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_IP)
+        multicast_sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 20)
+        multicast_sock.sendto(data, (multicastIP, port))
+
+
+    # Sends a basic message
+    def sendMessage(self, data, IP, port):
+        self.sock.sendto(data, (IP, port))
 
 
     # Start the message loop thread that will wait for a messages and send back

@@ -1,17 +1,18 @@
+import struct
+
 def decToBin(num, numBits):
-    return format(num, "0" + str(numBits) + "b")
+    strToFormat = '{0:0' + str(numBits) + 'b}'
+    return strToFormat.format(num)
+        
 
 class Robot():
 
-    # member variables
-    id = -1
-
     # opcodes for robot communication
     commandToBin = {"Assign":"00000001",
-    "Rotate Right": "00001101",
-    "Rotate Left": "00001110",
-    "Move Forward": "00001111",
-    "Move Backward": "00001100",
+    "Rotate Right": "00000101",
+    "Rotate Left": "00000110",
+    "Move Forward": "00000111",
+    "Move Backward": "00000100",
     "Stop": "00001000",
     "Read": "11110000",
     "Write": "11100000",
@@ -29,10 +30,10 @@ class Robot():
     }
 
     def __init__(self, _id):
-        id = _id
+        self.id = _id
 
     def robotMessage(self, command, param1, param2):
-        toReturn = decToBin(id, 4) + self.commandToBin[command] + decToBin(param1, 10) + decToBin(param2, 10)
-        return bytes(toReturn)
-
+        toReturn = decToBin(self.id, 4) + self.commandToBin[command] + decToBin(param1, 10) + decToBin(param2, 10)
+        print(toReturn)
+        return struct.pack('>I', int(toReturn, 2))
 
