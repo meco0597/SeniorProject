@@ -1,0 +1,27 @@
+Team: BumperCarSumo
+
+Date: November 11, 2019
+
+Overall project completion status:  80%
+
+Outstanding issues and risks: Raspberry Pi issues (it seems to "brick" a lot, we've gone through two already)
+
+
+=== Individual Updates ===
+
+Team Member: Melvin
+Tasks: Test Wii Boards with Pi
+Completion status: 50%
+Outstanding issues and risks: New Raspberry Pi not getting here in time
+
+
+Team Member: Jaden
+Tasks: Testing gear box
+Completion status: 90%
+Outstanding issues and risks: Getting the right glue for PLA and ensuring metal/PLA seal holds
+
+
+Team Member: Dan
+Tasks: Item procurement, Wii Board Algorithm
+Completion status: 60%
+Outstanding issues and risks: Expensive shipping rates, Wii Board calibration that works for everyone
