@@ -6,9 +6,9 @@ import time
 import cv2
 import threading
 
-class ColorDetection():        
-            
-    
+class ColorDetection():
+
+
     def __init__(self, _colorRanges, _threshold=1000, _show=False):
         self.colorRanges = _colorRanges
         self.threshold = _threshold
@@ -80,7 +80,7 @@ class ColorDetection():
         for image in self.outputImages:
             cv2.imshow(image, self.outputImages[image])
         self.lock.release()
-        
+
 
     def detectSingleColor(self, color, hsvImage):
         colorRange = self.getColorRanges()
@@ -94,11 +94,11 @@ class ColorDetection():
 
             # find the colors within the specified boundaries and apply the mask
             masks.append(cv2.inRange(hsvImage, lower, upper))
-            
+
         overallMask = masks[0]
         for mask in masks:
             overallMask = cv2.bitwise_or(mask, overallMask)
-        
+
         outputImage = cv2.bitwise_and(hsvImage, hsvImage, mask=overallMask)
         self.addToOutputImages(color, outputImage)
         nonzero = cv2.countNonZero(cv2.cvtColor(outputImage, cv2.COLOR_BGR2GRAY))
@@ -108,7 +108,7 @@ class ColorDetection():
             self.setDetected(color, False)
 
 
-    
+
     def startDetection(self):
         self.setDetecting(True)
         for frame in self.camera.capture_continuous(self.rawCapture, format="bgr", use_video_port=True):
@@ -139,5 +139,3 @@ class ColorDetection():
                 self.camera.release()
                 cv2.destroyAllWindows()
                 return
-
-        

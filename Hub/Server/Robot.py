@@ -3,9 +3,9 @@ import struct
 def decToBin(num, numBits):
     strToFormat = '{0:0' + str(numBits) + 'b}'
     return strToFormat.format(num)
-        
 
-class Robot():
+
+class RobotCommand():
 
     # opcodes for robot communication
     commandToBin = {"Assign":"00000001",
@@ -29,11 +29,10 @@ class Robot():
     "Temp": "11111011",
     }
 
-    def __init__(self, _id):
+    def __init__(self, _id=1):
         self.id = _id
 
     def robotMessage(self, command, param1, param2):
         toReturn = decToBin(self.id, 4) + self.commandToBin[command] + decToBin(param1, 10) + decToBin(param2, 10)
         print(toReturn)
         return struct.pack('>I', int(toReturn, 2))
-
