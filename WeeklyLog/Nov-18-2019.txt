@@ -1,0 +1,29 @@
+Team: BumperCarSumo
+
+Date: Nov 8, 2019
+
+Overall project completion status:  80%
+
+Outstanding issues and risks: Raspberry pi issues (we think we figured out the problem but we have a backup in place)
+
+
+=== Individual Updates ===
+
+Team Member: Melvin
+Tasks: Continue with game logic and get programs compatible with standard PC
+Completion status: 60%
+Outstanding issues and risks: Fine tuning OpenCV
+
+
+Team Member: Jaden
+Tasks: Laser cutting acrylic slab for gears
+Completion status: 80%
+Outstanding issues and risks: Acrylic is much thinner than our printed gears so we will have to glue 2 gears together
+to replace a standard gear, unsure if it will work just as good
+
+
+Team Member: Dan
+Tasks: Wii Board controller algorithm
+Completion status: 70%
+Outstanding issues and risks: Design choices are being debated about whether the board should act as a joystick or
+a standerd "left, right, forward, back" controller. Need to finalize it.
