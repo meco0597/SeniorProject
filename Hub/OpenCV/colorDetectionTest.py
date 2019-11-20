@@ -1,4 +1,4 @@
-from colorDetectionPiCamera import *
+from colorDetectionWebCamera import *
 
 colorRanges = { 'Red': [([0, 70, 50], [10, 255, 255]), ([170, 70, 50], [180, 255, 255])],
                 'Green': [([40, 40, 40], [70, 255, 255])],
@@ -8,9 +8,8 @@ colorRanges = { 'Red': [([0, 70, 50], [10, 255, 255]), ([170, 70, 50], [180, 255
 
 
 def Main():
-    testDetector = ColorDetection(colorRanges, _show=True)
+    testDetector = ColorDetectionWebCamera(colorRanges, _show=True)
     testDetector.startDetection()
 
 if __name__ == '__main__':
     Main()
-    

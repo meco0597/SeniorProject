@@ -5,12 +5,12 @@ import time
 
 # udp server config
 localIP = "127.0.0.1"
-RobotIP = "192.168.4.7"
+RobotIP = "192.168.4.4"
 multicastIP = '224.0.0.1'
 udpPort = 5050
 waitTime = 2000
 
-firstRobot = Robot(1)
+firstRobot = RobotCommand(1)
 forwardMessage = firstRobot.robotMessage("Move Forward", 500, 500)
 reverseMessage = firstRobot.robotMessage("Move Backward", 500, 500)
 stopMessage = firstRobot.robotMessage("Move Forward", 0, 0)
