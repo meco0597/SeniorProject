@@ -35,8 +35,8 @@
 /******************* Constants *******************/
 const int FW_VERSION = 2;
 const char* FW_URL = "http://192.168.1.66:8080/fota/";
-const char* HUB_SSID = "Texans";
-const char* HUB_PASSWORD = "Rockets123459876";
+const char* HUB_SSID = "HUBNETWORK";
+const char* HUB_PASSWORD = "AlwaysAtFun";
 const IPAddress BROADCAST_ADDRESS(192, 168, 1, 255);
 const IPAddress MULTICAST_ADDRESS(224, 0, 0, 0);
 #define UDP_PORT 5050
