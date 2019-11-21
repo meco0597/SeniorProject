@@ -34,11 +34,15 @@
 
 /******************* Constants *******************/
 const int FW_VERSION = 2;
-const char* FW_URL = "http://192.168.1.66:8080/fota/";
+const char* FW_URL = "http://192.168.4.66:8080/fota/";
 const char* HUB_SSID = "HUBNETWORK";
 const char* HUB_PASSWORD = "AlwaysAtFun";
-const IPAddress BROADCAST_ADDRESS(192, 168, 1, 255);
+const IPAddress BROADCAST_ADDRESS(192, 168, 4, 255);
 const IPAddress MULTICAST_ADDRESS(224, 0, 0, 0);
+const IPAddress STATIC_IP(192, 168, 4, 10); // Change this per robot
+const IPAddress GATEWAY(192, 168, 4, 1); // IP Address of the pi
+const IPAddress SUBNET(255, 255, 255, 0);
+const IPAddress DNS(8, 8, 8, 8);
 #define UDP_PORT 5050
 #define MAX_PACKET_SIZE  1023
 #define AIN1_PIN 4
@@ -107,6 +111,7 @@ void setup() {
   Serial.println("Current version: " + (String)FW_VERSION);
   
   // Connect to the hub
+  WiFi.config(STATIC_IP, SUBNET, GATEWAY, DNS); // Comment out this line to use DHCP
   WiFi.begin(HUB_SSID, HUB_PASSWORD);
   Serial.print("Connecting.");
 

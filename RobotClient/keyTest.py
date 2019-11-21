@@ -40,11 +40,11 @@ def spam():
     elif pressedKeys.get(keyboard.Key.up):
       senderPrint("005FFFFF")
     elif pressedKeys.get(keyboard.Key.left):
-      senderPrint("007FFFFF")
+      senderPrint("007000FF")
     elif pressedKeys.get(keyboard.Key.down):
       senderPrint("006FFFFF")
     elif pressedKeys.get(keyboard.Key.right):
-      senderPrint("004FFFFF")
+      senderPrint("004000FF")
     else:
       senderPrint("00400000")
 
