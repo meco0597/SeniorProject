@@ -1,0 +1,29 @@
+Team: Bumper Car Sumo
+
+Date: 25 Nov 2019
+
+Overall project completion status:  90%
+
+Outstanding issues and risks: Computer Vision capturing glare
+
+
+=== Individual Updates ===
+
+Team Member: Melvin
+Tasks: Play testing/tuning CV
+Completion status: 50%
+Outstanding issues and risks: Computer Vision glare
+
+
+Team Member: Jaden
+Tasks: Play testing/gear testing
+Completion status: 50%
+Outstanding issues and risks: Gears failing after long runs
+
+
+Team Member: Dan
+Tasks: Play testing/play area construction
+Completion status: 50%
+Outstanding issues and risks: Need longer USB cable for camera 
+
+
