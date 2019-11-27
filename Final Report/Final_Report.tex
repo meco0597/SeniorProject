@@ -34,18 +34,25 @@
 \maketitle
 
 \begin{abstract}
-
+BumperCarSumo is a fully interactive multiplayer game. Each player controls a little robot on a designated play area. A robot is controlled by a central game hub that communicates to the robots via WiFi. The controllers are connected to the hub with the use of Bluetooth technology. The robots are powered internally with a rechargable lithium ion battery and moves about the play area with geared DC Motors. The goal of the game is to be the last remaining player on the play area by any means possible. Once a player has fallen off of the play area, the player has lost the match. The hub tracks each robot with a web camera and an OpenCV program to ensure that once it has fallen off the play area, the robot will turn off and remains off until the next game. Once all but one player remains, the round is over and is free to be played again.
 \end{abstract}
 %This is all taken from 2018 requirements of the report and will be updated as needed
 
 \section{Introduction}
 %Introduction and motivation (describe the problem, and who cares if you solve it)
+The purpose of BumperCarSumo is to provide entertainment that mirrors popular Battle Royale game play with the use of physically controlled objects. The components currently required for game play is a white play area, a dark (black if possible) out of bounds zone, a web camera, a Raspberry Pi 3 B+, the BumperCarSumo program loaded onto the Raspberry Pi, two to four remote controlled robots, and the corresponding amount of controllers. Each component will be described throughout this report. 
 
 \section{Background}
+
 %Background (What other things are out there that you're drawing from? Are there similar things that you're referencing or extending?)
 
 \section{Project Implementation}
 %Project Implementation (The details of what you did, what you used, and why you made the choices you did. This is likely to be by far the largest section of your report, and can have multiple sub-sections) 
+\subsection{The Game Hub}
+
+We utilized a Raspberry Pi 3 B+ as our game hub. The device contained both Bluetooth and WiFi capabilities which was critical for communicating to the external game peripherals. The Pi was an excellent choice as it is small, portable, and capable enough to handle the software required for the game. 
+
+The controllers were connected to the Game Hub via Bluetooth. The controllers are based on Wii Balance Boards. The Game Hub starts the controller logic in a separate thread and once connected, continuously polls the Bluetooth devices to ensure they stay connected. When a game is in progress, the data collected from Bluetooth is processed. Once processed, the Game Hub will determine in which direction the player is leaning and send the corresponding command to the player's robot.
 
 \section{Discoveries}
 %Discoveries and pitfalls (things you learned and things that other groups would find helpful)
@@ -66,6 +73,6 @@
 %- Conclusions (wrap things up with some final text. Include a pointer to your final web site.) 
 
 \bibliographystyle{IEEEtran}
-\bibliography{IEEEabrv,bib/ref}
+%\bibliography{IEEEabrv,bib/ref}
 
 \end{document}
