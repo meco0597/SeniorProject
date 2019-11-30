@@ -46,6 +46,19 @@ The purpose of BumperCarSumo is to provide entertainment that mirrors popular Ba
 
 %Background (What other things are out there that you're drawing from? Are there similar things that you're referencing or extending?)
 
+The concept of BumperCarSumo originated from a desire to control robots and stage a free-for-all match between players. Battle Royale video games have become a huge success in recent years and we wanted to attempt similar style of ''last man standing'' with these remote controlled robots.
+
+The concept of the robots came from the Ollie Sphero. The comparison of the Ollie and our design can be seen in Figure \ref{Ollie}. Our design came out much bigger than expected due to the gears required to slow the motor down. The motors also created another reason for more space. The material used for traction was much simpler as we were intending for the robots to be able to slide if hit but still able to maintain a grip on the play area.
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.5\textwidth]{images/SideBySide.png}
+\caption{The Ollie from Sphero comparied with our Design\\Source: Adapted from \cite{ollie:19}}
+\label{Ollie}
+\end{figure}
+
+
 \section{Project Implementation}
 %Project Implementation (The details of what you did, what you used, and why you made the choices you did. This is likely to be by far the largest section of your report, and can have multiple sub-sections) 
 \subsection{The Game Hub}
@@ -54,25 +67,33 @@ We utilized a Raspberry Pi 3 B+ as our game hub. The device contained both Bluet
 
 The controllers were connected to the Game Hub via Bluetooth. The controllers are based on Wii Balance Boards. The Game Hub starts the controller logic in a separate thread and once connected, continuously polls the Bluetooth devices to ensure they stay connected. When a game is in progress, the data collected from Bluetooth is processed. Once processed, the Game Hub will determine in which direction the player is leaning and send the corresponding command to the player's robot.
 
+\subsection{Controllers}
+
+\subsection{Robots}
+
+\subsection{The Camera}
+
+\subsection{The Play Area}
+
 \section{Discoveries}
 %Discoveries and pitfalls (things you learned and things that other groups would find helpful)
+
+GEARS SUCK!
 
 \section{Evaluation}
 %How well did it work - be honest here - if there were things that didn't work out the way you expected, write about them too. Also make sure to describe your testing and evaluation strategy. Don't just say it worked - describe how you know it worked, and even what "worked" means. This is likely to be the second-largest section in your report.
 
-\subsection{Melvin}
-
-\subsection{Jaden}
-
-\subsection{Dan}
+GEARS MADE IT SUCK!
 
 \section{Bill of Materials}
 % Bill of materials (or at least a list of all the materials, equipment, etc. that you used. You don't need prices here, but you should include a list of things you used)
+
+Our project cost a whopping 900 dollary doos!
 
 \section{Conclusion}
 %- Conclusions (wrap things up with some final text. Include a pointer to your final web site.) 
 
 \bibliographystyle{IEEEtran}
-%\bibliography{IEEEabrv,bib/ref}
+\bibliography{IEEEabrv,bib/ref}
 
 \end{document}
