@@ -68,7 +68,9 @@ We utilized a Raspberry Pi 3 B+ as our game hub. The device contained both Bluet
 The controllers were connected to the Game Hub via Bluetooth. The controllers are based on Wii Balance Boards. The Game Hub starts the controller logic in a separate thread and once connected, continuously polls the Bluetooth devices to ensure they stay connected. When a game is in progress, the data collected from Bluetooth is processed. Once processed, the Game Hub will determine in which direction the player is leaning and send the corresponding command to the player's robot.
 
 \subsection{Controllers}
+For our controllers, we used the Wii Balance Board. Our intention behind this controller system was to add layers of complexity and extra challenges to gameplay. The interface was an opensource library found on github. There were a few versions of the library but we electected to use the library written in Python. We made an API for our purposes to be as simple as possible with only two functions that connected to a board and collected the data from the board.
 
+Our API relied on a single WiiController object that connected to multiple boards. The functions of the API are start and get\_data. The start function accepted the MAC Address of one of our boards and instantiated the board to a corresponding WiiBoard object board1, board2, board3, or board4. Once connected, the board will need to be continously polled to ensure the Bluetooth stayed connected. The get\_data function accepted the MAC Address of one Balance board and an array of that board's data would be returned to the Hub. The Hub then processes this data and sends the proper commands to the corresponding robot.
 \subsection{Robots}
 
 \subsection{The Camera}
