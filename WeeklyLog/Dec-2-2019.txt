@@ -1,0 +1,26 @@
+Team: BumperCarSumo
+
+Date: December 2, 2019
+
+Overall project completion status:  95%
+
+Outstanding issues and risks: N/A
+
+=== Individual Updates ===
+
+Team Member: Melvin
+Tasks: Play testing
+Completion status: 80%
+Outstanding issues and risks:
+
+
+Team Member: Jaden
+Tasks: Play testing
+Completion status: 80%
+Outstanding issues and risks: N/A
+
+
+Team Member: Dan
+Tasks: Play testing
+Completion status: 80%
+Outstanding issues and risks: N/A
