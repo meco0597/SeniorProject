@@ -61,6 +61,9 @@ The concept of the robots came from the Ollie Sphero. The comparison of the Olli
 
 \section{Project Implementation}
 %Project Implementation (The details of what you did, what you used, and why you made the choices you did. This is likely to be by far the largest section of your report, and can have multiple sub-sections) 
+
+The central piece of the game is the Game Hub. This Hub is constructed with a Raspberry Pi 3 B+ which included enough features to make the gameplay possible. The robots are PCBs and DC Motors wrapped in a 3D printed shell. Each PCB receives commands from the Game Hub via WiFi. Players control each robot with the use of a Wii Balance Board which is connected to the Hub through Bluetooth. The web camera is connected to the Game Hub with USB and detects the unique color of each robot. The play area is a 4ft round surface in which the robots are able to move around and play. The camera sits above the play area on an 8ft post. Each component of the project is described in more detail below. 
+
 \subsection{The Game Hub}
 
 We utilized a Raspberry Pi 3 B+ as our game hub. The device contained both Bluetooth and WiFi capabilities which was critical for communicating to the external game peripherals. The Pi was an excellent choice as it is small, portable, and capable enough to handle the software required for the game. 
@@ -70,8 +73,30 @@ The controllers were connected to the Game Hub via Bluetooth. The controllers ar
 \subsection{Controllers}
 For our controllers, we used the Wii Balance Board. Our intention behind this controller system was to add layers of complexity and extra challenges to gameplay. The interface was an opensource library found on github. There were a few versions of the library but we electected to use the library written in Python. We made an API for our purposes to be as simple as possible with only two functions that connected to a board and collected the data from the board.
 
-Our API relied on a single WiiController object that connected to multiple boards. The functions of the API are start and get\_data. The start function accepted the MAC Address of one of our boards and instantiated the board to a corresponding WiiBoard object board1, board2, board3, or board4. Once connected, the board will need to be continously polled to ensure the Bluetooth stayed connected. The get\_data function accepted the MAC Address of one Balance board and an array of that board's data would be returned to the Hub. The Hub then processes this data and sends the proper commands to the corresponding robot.
+Our API relied on a single WiiController object that connected to multiple boards. The functions of the API are start and get\_data. The start function accepts the MAC Address of one of our boards and instantiated the board to a corresponding WiiBoard object board1, board2, board3, or board4. Once connected, the board will need to be continously polled to ensure the Bluetooth stayed connected. The get\_data function accepts the MAC Address of one Balance board and an array of that board's data would be returned to the Hub. The Hub then processes this data and sends the proper commands to the corresponding robot.
+
 \subsection{Robots}
+
+The robots are a mix of hardware and software. A PCB lies within each robot that contains an ESP-12F. The ESP-12F runs custom software that drives the robot. We printed custom shells and wheels to protect and drive the robots. The custom hardware and software made debugging the robots a challenge but a worthwhile effort nonetheless. 
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.5\textwidth]{images/FinalPCB.jpg}
+\caption{The custom PCB that controls each robot}
+\label{PCB}
+\end{figure}
+
+The custom hardware lies in the PCB which can be seen in Figure \ref{PCB}. The PCB contains 4 mounting pads, 2 for each DC Motor that drives the robot, as well as M2.5 drill holes on each corner. The drill holes allowed for the PCBs to be mounted within the shell as seen in Figure \ref{shell}. The ESP-12F chip on the PCB was programmed with the use of USB and a CP2104 programmer chip on the board. An MPU is located in the center of the PCB. The MPU was integrated as a backup to the camera detection. The data from the MPU would allow us to determine if the robot had fallen from the board. This was later discarded as our Computer Vision portion of the project worked as expected. A DRV Motor Driver is included on the PCB to allow for the DC Motors to spin both forward and backward. 
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.5\textwidth]{images/Shell.png}
+\caption{A snapshot of the insides of the robot shell}
+\label{shell}
+\end{figure}
+
 
 \subsection{The Camera}
 
