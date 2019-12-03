@@ -87,7 +87,9 @@ The robots are a mix of hardware and software. A PCB lies within each robot that
 \label{PCB}
 \end{figure}
 
-The custom hardware lies in the PCB which can be seen in Figure \ref{PCB}. The PCB contains 4 mounting pads, 2 for each DC Motor that drives the robot, as well as M2.5 drill holes on each corner. The drill holes allowed for the PCBs to be mounted within the shell as seen in Figure \ref{shell}. The ESP-12F chip on the PCB was programmed with the use of USB and a CP2104 programmer chip on the board. An MPU is located in the center of the PCB. The MPU was integrated as a backup to the camera detection. The data from the MPU would allow us to determine if the robot had fallen from the board. This was later discarded as our Computer Vision portion of the project worked as expected. A DRV Motor Driver is included on the PCB to allow for the DC Motors to spin both forward and backward. 
+The custom hardware lies in the PCB which can be seen in Figure \ref{PCB}. The PCB contains 4 mounting pads, 2 for each DC Motor that drives the robot, as well as M2.5 drill holes on each corner. The drill holes allowed for the PCBs to be mounted within the shell as seen in Figure \ref{shell}. The ESP-12F chip on the PCB was programmed with the use of USB and a CP2104 programmer chip on the board. An MPU is located in the center of the PCB. The MPU was integrated as a backup to the camera detection. The data from the MPU would allow us to determine if the robot had fallen from the board. This was later discarded as our Computer Vision portion of the project worked as expected. A DRV Motor Driver is included on the PCB to allow for the DC Motors to spin both forward and backward. A LDO chip was also added to handle voltage dropouts. 
+
+The software in the ESP-12F is responsible for receiving data from the Game Hub via WiFi and converting that data to voltages delivered to the DC Motors.  
 
 \begin{figure}[H]
 \centering
@@ -97,13 +99,26 @@ The custom hardware lies in the PCB which can be seen in Figure \ref{PCB}. The P
 \label{shell}
 \end{figure}
 
-
 \subsection{The Camera}
+
+
 
 \subsection{The Play Area}
 
+The play area is simple in nature but plays an essential part in the overall game. We painted the table top white and covered the floor black with a sheet. As described in the camera section, every color that would enter the black region would be filtered out. The most complex piece of the play area was the 8ft pole which held the camera. It was essential the camera be at this height as to ensure all players in the area would be caputed. We were lucky enough to get a table that sat enough off the ground that would not allow a player to reenter the game if a glitch with the Computer Vision were to occur. This would cause other problems but during the demo day, this proved to be a nonissue. 
+
 \section{Discoveries}
 %Discoveries and pitfalls (things you learned and things that other groups would find helpful)
+
+We learned pretty quick that the original DC motors we were using were far too powerful for such a small play area. The motors offered over 1000 RPM which can be handled with gearing the motors. The unfortunate result of this, however, was the small area in which the gears were to fit. The first few attempts at gearing the motors were a success in many ways and a failure in others. The gears did work and we were able to get a simple gear test box working as seen in Figure \ref{gears}. The gears faced problems with proper meshing, resulting in small pieces of PLA to fly from the test box. With lubrication, the problem continued still. 
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.5\textwidth]{images/GearTest.jpg}
+\caption{The first ideration of the designed gears}
+\label{gears}
+\end{figure}
 
 GEARS SUCK!
 
