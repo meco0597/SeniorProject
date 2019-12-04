@@ -87,16 +87,16 @@ The robots are a mix of hardware and software. A PCB lies within each robot that
 \label{PCB}
 \end{figure}
 
-The custom hardware lies in the PCB which can be seen in Figure \ref{PCB}. The PCB contains 4 mounting pads, 2 for each DC Motor that drives the robot, as well as M2.5 drill holes on each corner. The drill holes allowed for the PCBs to be mounted within the shell as seen in Figure \ref{shell}. The ESP-12F chip on the PCB was programmed with the use of USB and a CP2104 programmer chip on the board. An MPU is located in the center of the PCB. The MPU was integrated as a backup to the camera detection. The data from the MPU would allow us to determine if the robot had fallen from the board. This was later discarded as our Computer Vision portion of the project worked as expected. A DRV Motor Driver is included on the PCB to allow for the DC Motors to spin both forward and backward. A LDO chip was also added to handle voltage dropouts. 
+The custom hardware lies in the PCB which can be seen in Figure \ref{PCB}. The PCB contains 4 mounting pads, 2 for each DC Motor that drives the robot, as well as M2.5 drill holes on each corner. The drill holes allowed for the PCBs to be mounted within the shell as seen in Figure \ref{robot}. The ESP-12F chip on the PCB was programmed with the use of USB and a CP2104 programmer chip on the board. An MPU is located in the center of the PCB. The MPU was integrated as a backup to the camera detection. The data from the MPU would allow us to determine if the robot had fallen from the board. This was later discarded as our Computer Vision portion of the project worked as expected. A DRV Motor Driver is included on the PCB to allow for the DC Motors to spin both forward and backward. A LDO chip was also added to handle voltage dropouts. 
 
 The software in the ESP-12F is responsible for receiving data from the Game Hub via WiFi and converting that data to voltages delivered to the DC Motors.  
 
 \begin{figure}[H]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=0.5\textwidth]{images/Shell.png}
-\caption{A snapshot of the insides of the robot shell}
-\label{shell}
+\includegraphics[width=0.5\textwidth]{images/FinalRobot.jpg}
+\caption{The finalized robot components in shell}
+\label{robot}
 \end{figure}
 
 \subsection{The Camera}
@@ -128,6 +128,8 @@ We learned pretty quick that the original DC motors we were using were far too p
 \label{gears}
 \end{figure}
 
+The biggest shortcoming we encountered was not developing a prototype in early November. We ordered some of the pregeared motors in October and elected to go with the more powerful motors that required custom gearing to work. In retrospect, we saw that even though we did not intend to go with the pregeared motors, we could have and should have created a prototype with the pregeared motors to test the game area, controllers, and OpenCV with a working robot. This would have also saved time after determining that the custom motors would not work as  expected. 
+
 \section{Evaluation}
 %How well did it work - be honest here - if there were things that didn't work out the way you expected, write about them too. Also make sure to describe your testing and evaluation strategy. Don't just say it worked - describe how you know it worked, and even what "worked" means. This is likely to be the second-largest section in your report.
 
@@ -135,9 +137,25 @@ Despite any setbacks and initial concerns, the project was a huge success. While
 
 The gears are among the greatest achievements and failures of the project. If they had succeeded, the robots would have had more power, leading to harder collisions and potentially more intense games. After a few tests with a completed robot with the custom gears, we soon discovered that the gears proved to be unreliable. The lubrication did stop the gears from heating up and melting but the inconsistent gear meshing led to an unsuccessful implementation. While testing the custom geared robots, the gears would not always turn and got stuck easily. This would have been a disaster during Demo Day. After a few days of trying to solve the issue and attempting to make acrylic gears, we decided to ditch the gears and use pregeared DC Motors. The pregeared motors did not offer the same power but they were able to get the robots moving consistently. The gears were devastating to the project and is the main reason why our stretch goals were not met.
 
-The PCBs used for the project were well designed with each iteration and worked well every step of the way. The first PCB was designed in April, right before our planning phase was complete. This preliminary PCB was equipped with pinheaders (absent in later models) to debug the design. This worked in our favor as we discovered that the MPU held some pins low by default which prevented the ESP-12F from powering up. The second PCB corrected this by removing the connection of that pin to the ESP-12F. This was a trade off as we were no longer able to receive interrupts from the MPU. The second PCB also contained drill holes for mounting the PCBs into the robot shells. The third and final PCBs were very similar to the second with a few parts moved around to ensure each component was clear of the screws in the drill holes. The PCB, while a tedious task to solder, was one of the most successful components of the project.  
+The gears not only cost us extra time, it cost us extra money. The original motors purchased totaled at \$X.XX. With it, brass rods were required along with lubricant. Once acrylic gears were tried, three acrylic sheets were puchased, totalling around \$16. The gears required several iterations of shell components which created a major loss of our PLA filament. With the excess filament, we could have increased the amount of players on the board. The original motor and gear scheme took up a lot more room than the later design, leading to larger shells which required more filament. The gears did end up costing us more but fortunately the expenses were not too excessive.
+
+Despite the gears being a loss, the design of the shell proved to be a success. The design was modular in nature. As can be seen in Figure \ref{shell}, there are inserts for the gear plates that were later modified to suit the needs of the pregeared motors that were used in the final design. The batteries used in the shells weighted it down enough to prevent the body of the shell from excess rotation. Though the body still rotates, it has proved to be a fun "feature, not a bug" game mechanic. Ramps were also added to fit in where the square hole was that was originally designed for USB cable insertion. This was a fortunate coincidence for us as the ramps prevented the robots from rotating the body forward and also added an extra game mechanic, allowing to move robots from the side and not the only the front. The wheels required a small piece of electric or duct tape for good traction on the play area. Fortunately, the cost of the shell was limited to the cost of the PLA filament which totaled no more than \$40. The shell was designed well and the modular design saved us as many changes were made later in timeline. 
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.5\textwidth]{images/Shell.png}
+\caption{A snapshot of the insides of the original robot shell with gears}
+\label{shell}
+\end{figure}
+
+The PCBs used for the project were well designed with each iteration and worked well every step of the way. The first PCB was designed in April, right before our planning phase was complete. This preliminary PCB was equipped with pinheaders (absent in later models) to debug the design. This worked in our favor as we discovered that the MPU held some pins low by default which prevented the ESP-12F from powering up. We were able to make this discovery by utilizing I2C to communicate with the chip and turn the pin to high to activate the ESP-12F. The second PCB corrected this by removing the connection of that pin to the ESP-12F. This was a trade off as we were no longer able to receive interrupts from the MPU. The second PCB also contained drill holes for mounting the PCBs into the robot shells. The third and final PCBs were very similar to the second with a few parts moved around to ensure each component was clear of the screws in the drill holes. The PCB, while a tedious task to solder, was one of the most successful components of the project.  
 
 The Raspberry Pi was a very useful aspect to the project, allowing us to use free and open source libraries, but we were ill prepared for the issues it came with. The Raspberry Pi worked very well for our needs and the multicore processing power helped the game logic run smoothly. Melvin was able to enable threading so the Bluetooth controllers, WiFi, game logic, and camera/OpenCV interface ran seamlessly. We were unaware of the poor power protection provided by the Raspberry Pi hardware. The first Raspberry Pi was fried after the Pi Camera drew too much current which also broke the Pi Camera. We assumed incorrectly that the Raspberry Pi would have a robust power protection scheme. The second Raspberry Pi was fried for unknown reasons. The third Raspberry Pi fried when two GPIO pins shorted to one another. Once we discovered how vulnerable the Raspberry Pi's are, we treated the last with extra special care. The final Raspberry Pi was to remain in the casing and only be connected to anything via USB, HDMI, and the official Raspberry Pi power supply. Once these issues were all sorted out, we treated it as delicately as a newborn baby. We were on the verge of porting all of the code to someone's laptop but the laptop would require running Linux as all of our Raspberry Pi code works only on Linux libraries. This would have been an even larger upset so we decided to keep with the Raspberry Pi and we fortunately found out all potential power issues and it suited our needs. 
+
+The Wii Balance Boards made the game play a lot more fun than intended. When selecting our controllers in our initial proposal, we stated concerns about multiple Bluetooth objects in a single area creating a lot of noise. This proved to be a nonissue as there were little to no issues with interfacing with the Wii Balance Boards. We used a simple control scheme to make the game play intuitive, fun, and exciting. When a player leans forward, the robot moves forward. When the player leans back, the robot moves back. When leaning left and right, the robot would only rotate in that direction. This added some extra strategy from a player standpoint. Players need to now think a few moves ahead to ensure that they will not be vulnerable when needing to move right or left. The controllers proved to be a vital component that made the game so enjoyable.
+
+The use of WiFi and Bluetooth to control the game was a huge success. During our presentation, we noted that were was a lot of potential for noise interference and latency issues. Fortunately we did not encounter any of these issues. The response time from controller input to robot movement was so good there was hardly any latency observed. The response time of the camera and OpenCV was also fast enough that when a robot left the arena, it was immediately turned off. 
 
 \section{Bill of Materials}
 % Bill of materials (or at least a list of all the materials, equipment, etc. that you used. You don't need prices here, but you should include a list of things you used)
@@ -146,6 +164,8 @@ Our project cost a whopping 900 dollary doos!
 
 \section{Conclusion}
 %- Conclusions (wrap things up with some final text. Include a pointer to your final web site.) 
+
+Our senior project proved to be a huge success and we learned many valuable lessons from it. We were able to work the first three months of the semester in parallel which resulted in rapid development. We began integrating around November and had it finalized just in time to present at Demo Day. The project milestones and meeting logs can be found at http://bumpercarsumo.weebly.com/.
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,bib/ref}
