@@ -101,16 +101,24 @@ The software in the ESP-12F is responsible for receiving data from the Game Hub 
 
 \subsection{The Camera}
 
-
+The camera used for the project was a Logitech web camera. We considered the Pi Camera as well for the camera but proved to be unreliable. Our first experiment with the Pi Camera ended up shorting something out in the circuitry and our first Raspberry Pi was inoperable. The Pi Camera did offer faster operating speed as the USB interface was bypassed but we elected to use the Logitech camera. We used a 12ft male-to-female USB extension cable which allowed for the camera to rest on top of the camera perch and not the entire Raspberry Pi system which allowed us to easily use the Pi on a nearby table. After a few tests conducted with the camera and OpenCV, any fears of latency were soon removed as the camera proved to be an easy to use asset perfect for the job.  
 
 \subsection{The Play Area}
 
-The play area is simple in nature but plays an essential part in the overall game. We painted the table top white and covered the floor black with a sheet. As described in the camera section, every color that would enter the black region would be filtered out. The most complex piece of the play area was the 8ft pole which held the camera. It was essential the camera be at this height as to ensure all players in the area would be caputed. We were lucky enough to get a table that sat enough off the ground that would not allow a player to reenter the game if a glitch with the Computer Vision were to occur. This would cause other problems but during the demo day, this proved to be a nonissue. 
+The play area is simple in nature but plays an essential part in the overall game. We painted the table top white. The floor we were working on caputured the carpet as black, avoiding a need to place a black sheet as the backdrop. As described in the camera section, every color that would enter the black region would be filtered out, meaning once the robot was off the white play area, it turned off and was unable to accept user input. The most complex piece of the play area was the 8ft pole which held the camera. Figure \ref{area} shows how high up the camera needed to rest in order for the entire play area to be seen. It was essential the camera be at this height as to ensure all robots in the area would be captured. We were lucky enough to get a table that sat off the ground enough so that once a player was out, they could not reenter if a glitch with the Computer Vision were to occur. Though this proved to be a nonissue, it was reassuring to have a backup in the worst case scenario. 
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.5\textwidth]{images/PlayArea.jpg}
+\caption{The constructed play area}
+\label{area}
+\end{figure}
 
 \section{Discoveries}
 %Discoveries and pitfalls (things you learned and things that other groups would find helpful)
 
-We learned pretty quick that the original DC motors we were using were far too powerful for such a small play area. The motors offered over 1000 RPM which can be handled with gearing the motors. The unfortunate result of this, however, was the small area in which the gears were to fit. The first few attempts at gearing the motors were a success in many ways and a failure in others. The gears did work and we were able to get a simple gear test box working as seen in Figure \ref{gears}. The gears faced problems with proper meshing, resulting in small pieces of PLA to fly from the test box. With lubrication, the problem continued still. 
+We learned pretty quick that the original DC motors we were using were far too powerful for such a small play area. The motors offered over 1000 RPM which can be handled with gearing the motors. The unfortunate result of this, however, was the small area in which the gears were to fit. The first few attempts at gearing the motors were a success in many ways and a failure in others. The gears did work and we were able to get a simple gear test box working as seen in Figure \ref{gears}. The gears faced problems with proper meshing, resulting in small pieces of PLA to fly from the test box. With lubrication, the problem continued still. We also attempted acrylic gears as a laser cutter was able to make more precise cuts, allowing the gears to mesh better. Similar problems persisted with acrylic gears as well and any lubrication on the acrylic gears proved to be fruitless. 
 
 \begin{figure}[H]
 \centering
@@ -120,12 +128,16 @@ We learned pretty quick that the original DC motors we were using were far too p
 \label{gears}
 \end{figure}
 
-GEARS SUCK!
-
 \section{Evaluation}
 %How well did it work - be honest here - if there were things that didn't work out the way you expected, write about them too. Also make sure to describe your testing and evaluation strategy. Don't just say it worked - describe how you know it worked, and even what "worked" means. This is likely to be the second-largest section in your report.
 
-GEARS MADE IT SUCK!
+Despite any setbacks and initial concerns, the project was a huge success. While we were not able to accomplish all of our stretch goals, the most basic of play modes was achieved and everyone at the Demo Day had fun playing the game. There were many areas of the project that had unique hang-ups, challenges, and roadblocks. Some of these we were able to solve with little to no issue, others took some time, and the leftovers were abandoned. The next section will cover aspects of the project that worked well and others that are now dead in the water.
+
+The gears are among the greatest achievements and failures of the project. If they had succeeded, the robots would have had more power, leading to harder collisions and potentially more intense games. After a few tests with a completed robot with the custom gears, we soon discovered that the gears proved to be unreliable. The lubrication did stop the gears from heating up and melting but the inconsistent gear meshing led to an unsuccessful implementation. While testing the custom geared robots, the gears would not always turn and got stuck easily. This would have been a disaster during Demo Day. After a few days of trying to solve the issue and attempting to make acrylic gears, we decided to ditch the gears and use pregeared DC Motors. The pregeared motors did not offer the same power but they were able to get the robots moving consistently. The gears were devastating to the project and is the main reason why our stretch goals were not met.
+
+The PCBs used for the project were well designed with each iteration and worked well every step of the way. The first PCB was designed in April, right before our planning phase was complete. This preliminary PCB was equipped with pinheaders (absent in later models) to debug the design. This worked in our favor as we discovered that the MPU held some pins low by default which prevented the ESP-12F from powering up. The second PCB corrected this by removing the connection of that pin to the ESP-12F. This was a trade off as we were no longer able to receive interrupts from the MPU. The second PCB also contained drill holes for mounting the PCBs into the robot shells. The third and final PCBs were very similar to the second with a few parts moved around to ensure each component was clear of the screws in the drill holes. The PCB, while a tedious task to solder, was one of the most successful components of the project.  
+
+The Raspberry Pi was a very useful aspect to the project, allowing us to use free and open source libraries, but we were ill prepared for the issues it came with. The Raspberry Pi worked very well for our needs and the multicore processing power helped the game logic run smoothly. Melvin was able to enable threading so the Bluetooth controllers, WiFi, game logic, and camera/OpenCV interface ran seamlessly. We were unaware of the poor power protection provided by the Raspberry Pi hardware. The first Raspberry Pi was fried after the Pi Camera drew too much current which also broke the Pi Camera. We assumed incorrectly that the Raspberry Pi would have a robust power protection scheme. The second Raspberry Pi was fried for unknown reasons. The third Raspberry Pi fried when two GPIO pins shorted to one another. Once we discovered how vulnerable the Raspberry Pi's are, we treated the last with extra special care. The final Raspberry Pi was to remain in the casing and only be connected to anything via USB, HDMI, and the official Raspberry Pi power supply. Once these issues were all sorted out, we treated it as delicately as a newborn baby. We were on the verge of porting all of the code to someone's laptop but the laptop would require running Linux as all of our Raspberry Pi code works only on Linux libraries. This would have been an even larger upset so we decided to keep with the Raspberry Pi and we fortunately found out all potential power issues and it suited our needs. 
 
 \section{Bill of Materials}
 % Bill of materials (or at least a list of all the materials, equipment, etc. that you used. You don't need prices here, but you should include a list of things you used)
