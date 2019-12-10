@@ -4,6 +4,7 @@
 \usepackage{lettrine}
 \usepackage{caption}
 \usepackage{url}
+\usepackage{listings}
 
 
 \newcommand\blfootnote[1]{%
@@ -130,7 +131,7 @@ We learned pretty quick that the original DC motors we were using were far too p
 \label{gears}
 \end{figure}
 
-The biggest shortcoming we encountered was not developing a prototype in early November. We ordered some of the pregeared motors in October and elected to go with the more powerful motors that required custom gearing to work. In retrospect, we saw that even though we did not intend to go with the pregeared motors, we could have and should have created a prototype with the pregeared motors to test the game area, controllers, and OpenCV with a working robot. This would have also saved time after determining that the custom motors would not work as  expected. 
+The biggest shortcoming we encountered was not developing a prototype in early November. We ordered some of the pregeared motors in October and elected to go with the more powerful motors that required custom gearing to work. In retrospect, we saw that even though we did not intend to go with the pregeared motors, we could have and should have created a prototype with the pregeared motors to test the game area, controllers, and OpenCV with a working robot. This would have also saved time after determining that the custom motors would not work as expected. 
 
 \section{Evaluation}
 %How well did it work - be honest here - if there were things that didn't work out the way you expected, write about them too. Also make sure to describe your testing and evaluation strategy. Don't just say it worked - describe how you know it worked, and even what "worked" means. This is likely to be the second-largest section in your report.
@@ -162,7 +163,40 @@ The use of WiFi and Bluetooth to control the game was a huge success. During our
 \section{Bill of Materials}
 % Bill of materials (or at least a list of all the materials, equipment, etc. that you used. You don't need prices here, but you should include a list of things you used)
 
-Our project cost a whopping 900 dollary doos!
+Our project cost a whopping 900 dollary doos!% lmao
+\begin{lstlisting}
+Per PCB:
+1x DRV8835 low-voltage motor driver
+1x JST 2 Pin SMT RA connector
+1x MPU 6050 IMU
+1x SMT USB Mini-B connector
+1x MCP73831/2 LiPo battery charger
+1x TLV757P LDO
+1x ESP-12F
+1x CP2104-F03-GM
+7x 10k Ohm 
+4x 1k Ohm 
+1x 4.7k Ohm 
+1x 2k Ohm 
+3x 3.3k Ohm 
+1x 10k Ohm 1\%
+1x 33k Ohm 1\%
+1x 100 uF electrolytic capacitor (through hole)
+5x 0.1 uF ceramic capacitor 
+3x 1 uF ceramic capacitor 
+3x 10 uF ceramic capacitor 
+1x 2.2 nF ceramic capacitor 
+1x 10 nF ceramic capacitor 
+2x LEDs
+2x NPN transistor Package: SOT23
+
+1x Table with no legs
+1x Logitech web camera
+1x Raspberry Pi 3 B+
+2kg PLA
+Spray paint
+Various screws
+\end{lstlisting}
 
 \section{Conclusion}
 %- Conclusions (wrap things up with some final text. Include a pointer to your final web site.) 
