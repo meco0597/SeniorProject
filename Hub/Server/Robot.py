@@ -34,5 +34,4 @@ class RobotCommand():
 
     def robotMessage(self, command, param1, param2):
         toReturn = decToBin(self.id, 4) + self.commandToBin[command] + decToBin(param1, 10) + decToBin(param2, 10)
-        print(toReturn)
         return struct.pack('>I', int(toReturn, 2))
