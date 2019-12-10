@@ -12,9 +12,9 @@ class udpServer():
         self.port = _port
         self.messageRecievedDelegate = _messageRecievedDelegate
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sock.bind(("", self.port));
         self.sendBuffer = {}
         self.lock = threading.Lock()
-        self.sock.bind(('', self.port))
         print("Server started on host: " + str(self.IP) + " Port: " + str(self.port))
 
 
@@ -43,10 +43,12 @@ class udpServer():
             # call the handler for new data recieved
             if data:
                 self.messageRecievedDelegate(data, addr)
+            else:
+                print("no data")
             for address in sendBuff:
                 # if there is information to send back then send it
                 if sendBuff[address] != "":
-                    self.sock.sendto(bytes(sendBuff[address]), addr)
+                    self.sock.sendto(bytes(sendBuff[address]), (addr, self.port))
 
 
     # This will broadcast data to a multicast ip
